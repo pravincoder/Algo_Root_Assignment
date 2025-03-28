@@ -159,9 +159,12 @@ If something goes wrong, you'll receive a response with a 500 status code and an
 ```
 ### Example ScreenShots 
 
-![Postman1](https://github.com/user-attachments/assets/51f6c034-58af-4953-bde0-b4fb268bab9a)
+![Iamge3](https://github.com/user-attachments/assets/5036f954-09be-4a38-b87f-640dc41da349)
 
-![Postman2](https://github.com/user-attachments/assets/6378e143-0ac0-4b2f-b929-fb684a1c2fea)
+![Image1](https://github.com/user-attachments/assets/704d3c6e-3a25-447f-8e82-4ffbc0b6e6f0)
+
+![Image2](https://github.com/user-attachments/assets/9fb63ac6-8a29-4d55-a937-e30087b3d63f)
+
 
 ### Tips for Testing
 - Use different `session_id` values to test session isolation
