@@ -86,12 +86,80 @@ Start the server using:
 uvicorn api:app --host 0.0.0.0 --port 8000
 ```
 
-## Notes
-- The calculator function is Windows-specific and needs modification for other operating systems
-- Shell command execution should be used with caution in production environments
-- Session history is stored in memory and will be cleared on server restart
+## Testing with Postman
 
-## Security Considerations
-- Function execution is limited to predefined system operations.
-- Shell command execution should be properly sanitized in production.
-- Consider implementing authentication for the API endpoint.
+### Testing the `/execute` Endpoint
+
+1. Open Postman and create a new request
+2. Set the request method to `POST`
+3. Enter the URL: `http://localhost:8000/execute`
+4. Go to the "Headers" tab and add:
+   - Key: `Content-Type`
+   - Value: `application/json`
+
+5. Go to the "Body" tab:
+   - Select "raw"
+   - Choose "JSON" format
+   - Use the following example payloads:
+
+#### Example 1: Opening Chrome
+```json
+{
+    "prompt": "I want to open chrome browser",
+    "session_id": "user123"
+}
+```
+
+#### Example 2: Checking CPU Usage
+```json
+{
+    "prompt": "What's my current CPU usage?",
+    "session_id": "user123"
+}
+```
+
+#### Example 3: Opening Calculator
+```json
+{
+    "prompt": "Can you open the calculator app",
+    "session_id": "user123"
+}
+```
+
+### Expected Responses
+
+For Chrome:
+```json
+{
+    "function": "open_chrome",
+    "code": "\nfrom function_registry import open_chrome\n\ndef main():\n    try:\n        open_chrome()\n        print(\"open_chrome executed successfully.\")\n    except Exception as e:\n        print(f\"Error executing open_chrome: {e}\")\n\nif __name__ == \"__main__\":\n    main()\n    "
+}
+```
+
+For CPU Usage:
+```json
+{
+    "function": "get_cpu_usage",
+    "code": "\nfrom function_registry import get_cpu_usage\n\ndef main():\n    try:\n        get_cpu_usage()\n        print(\"get_cpu_usage executed successfully.\")\n    except Exception as e:\n        print(f\"Error executing get_cpu_usage: {e}\")\n\nif __name__ == \"__main__\":\n    main()\n    "
+}
+```
+
+### Testing Session History
+
+To test how the system uses conversation history, you can send multiple requests with the same `session_id`. The system will maintain context for up to 5 previous prompts.
+
+### Error Responses
+
+If something goes wrong, you'll receive a response with a 500 status code and an error message:
+
+```json
+{
+    "detail": "Error message description"
+}
+```
+
+### Tips for Testing
+- Use different `session_id` values to test session isolation
+- Try similar prompts to test the RAG system's matching capabilities
+- Test with invalid inputs to verify error handling
+- Monitor the server console for additional debugging information
