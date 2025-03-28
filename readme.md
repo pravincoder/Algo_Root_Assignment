@@ -157,6 +157,11 @@ If something goes wrong, you'll receive a response with a 500 status code and an
     "detail": "Error message description"
 }
 ```
+### Example ScreenShots 
+
+![Postman1](https://github.com/user-attachments/assets/51f6c034-58af-4953-bde0-b4fb268bab9a)
+
+![Postman2](https://github.com/user-attachments/assets/6378e143-0ac0-4b2f-b929-fb684a1c2fea)
 
 ### Tips for Testing
 - Use different `session_id` values to test session isolation
